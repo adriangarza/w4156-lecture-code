@@ -22,6 +22,21 @@ class MoodCalculator:
 
         # TODO - student to complete the rest of the function and write the tests
 
+        # the second range: blood sugar
+        if not 70 <= blood_sugar <= 90:
+            raise ValueError("Blood Sugar:%s not within valid range (%s,%s)" % (blood_sugar, 70, 90))
+
+        if 0 <= sleep_deprivation <= 26:
+            if 70 <= blood_sugar <= 75:
+                return Mood.Irritated
+            elif 75 < blood_sugar <= 90:
+                return Mood.Joyful
+
+        elif 26 < sleep_deprivation <= 36:
+            if 70 <= blood_sugar <= 75:
+                return Mood.Grumpy
+            elif 75 < blood_sugar <= 90:
+                return Mood.Hulk
 
 
 
