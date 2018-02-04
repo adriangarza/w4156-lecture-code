@@ -47,12 +47,18 @@ class MyTestCase(unittest.TestCase):
             (1, 4, FriendFoe.Friend)
         ]]
 
-        enemies = self.nav_computer.detect_nearest_enemy(1, other_planes)
-        self.assertEqual(len(enemies), 1)
+        enemies = self.nav_computer.detect_nearest_enemy(2, other_planes)
+        self.assertEqual(len(enemies), 2)
 
+        # we also want the right enemies
+        # for some reason, getNearestEnemies is specified to return a list of radarSignature tuples instead of a list of
+        # radar signatures. it looks like [(radarSignature), (radarSignature)].
+        # therefore actually accessing the values makes PyCharm complain
+        first_points = (enemies[0].x, enemies[0].y) == (3, 0)
+        second_points = (enemies[1].x, enemies[1].y) == (1, 4)
 
-
-
+        self.assertEqual(first_points, True)
+        self.assertEqual(second_points, True)
 
 
 if __name__ == '__main__':
