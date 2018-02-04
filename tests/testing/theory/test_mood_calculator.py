@@ -19,7 +19,6 @@ class MyTestCase(unittest.TestCase):
     def test_mood_calculator(self):
 
         """
-        TODO - Exercise for the student to write and test the mood calculator
         :return: nothing
 
         according to the lecture slides, we know:

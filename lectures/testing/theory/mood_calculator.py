@@ -20,8 +20,6 @@ class MoodCalculator:
         if not 0 <= sleep_deprivation <= 36:
             raise ValueError("Sleep Deprivation:%s not within valid range (%s,%s)" % (sleep_deprivation, 0, 36))
 
-        # TODO - student to complete the rest of the function and write the tests
-
         # the second range: blood sugar
         if not 70 <= blood_sugar <= 90:
             raise ValueError("Blood Sugar:%s not within valid range (%s,%s)" % (blood_sugar, 70, 90))
