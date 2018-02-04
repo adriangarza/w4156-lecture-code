@@ -11,6 +11,8 @@ class MyTestCase(unittest.TestCase):
         - the nav computer never returns more than asked for
         - the nav computer only gets the nearest enemies
         - the nav computer doesn't accept invalid numbers (i.e. more than 0)
+        - the nav computer returns an empty list if no enemies
+        - to add to that, the computer returns as many enemies possible that fit the number asked for
     """
 
     def setUp(self):
@@ -24,10 +26,33 @@ class MyTestCase(unittest.TestCase):
 
     def test_no_enemies(self):
         # with no enemies, the nav computer should return an empty list
-        num_enemies = self.nav_computer.detect_nearest_enemy(1, [])
+        enemies = self.nav_computer.detect_nearest_enemy(1, [])
+        self.assertEqual(len(enemies), 0)
 
-    # def test_actual_enemies(self):
-        # make sure the nav computer doesn't ever return friends
+        # and then test again but with friends thrown in for good measure
+        other_planes = [RadarSignature(x[0], x[1], x[2]) for x in [
+            (1, 1, FriendFoe.Friend),
+            (1, 4, FriendFoe.Friend)
+        ]]
+        enemies = self.nav_computer.detect_nearest_enemy(1, other_planes)
+        self.assertEqual(len(enemies), 0)
+
+    def test_actual_enemies(self):
+        other_planes = [RadarSignature(x[0], x[1], x[2]) for x in [
+            (1, 4, FriendFoe.Foe),
+            (2, 8, FriendFoe.Foe),
+            (3, 0, FriendFoe.Foe),
+            (1, 10, FriendFoe.Foe),
+            (1, 1, FriendFoe.Friend),
+            (1, 4, FriendFoe.Friend)
+        ]]
+
+        enemies = self.nav_computer.detect_nearest_enemy(1, other_planes)
+        self.assertEqual(len(enemies), 1)
+
+
+
+
 
 
 if __name__ == '__main__':
